@@ -2,6 +2,7 @@ package controle;
 
 import java.awt.event.ActionEvent;
 import formulario.FrmClienteListar;
+import formulario.FrmCliente;
 import entidade.Cliente;
 
 /**
@@ -9,52 +10,78 @@ import entidade.Cliente;
  */
 public class CtrClienteListar {
 
-	private FrmClienteListar frmClienteListar;
+    private FrmCliente frmPai;
+    private FrmClienteListar frmClienteListar;
 
-	/**
-	 * Construtor sem argumentos.
-	 */
-	public CtrClienteListar() {
-		// Instacia a janela
-		setFrmClienteListar(new FrmClienteListar());
+    /**
+     * Construtor sem argumentos.
+     * @param frmPai o formulário pai da janela
+     */
+    public CtrClienteListar(FrmCliente frmPai) {
+        //Seta a janela pai
+        this.frmPai = frmPai;
 
-		// Associa os eventos aos componentes
-		
-		getFrmClienteListar().jBFechar
-		.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				jBFechar_actionPerformed(e);
-			}
-		});
-	}
+        // Instacia a janela
+        setFrmClienteListar(new FrmClienteListar());
 
-	/**
-	 * Operação que inicia a sequência de interações da manutenção de cliente.
-	 */
-	public void executar() {
-		Cliente cliente = new Cliente();		
-		getFrmClienteListar().popularTabela(cliente.getLista());
-		getFrmClienteListar().setVisible(true);
-	}
+        // Associa os eventos aos componentes
+        getFrmClienteListar().jBFechar
+                .addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jBFechar_actionPerformed(e);
+                    }
+                });
+    }
 
-	
-	public void jBFechar_actionPerformed(ActionEvent e) {	
-		getFrmClienteListar().setVisible(false);
-	}
+    /**
+     * Operação que inicia a sequência de interações da manutenção de cliente.
+     */
+    public void executar() {
+        Cliente cliente = new Cliente();
+        getFrmClienteListar().popularTabela(cliente.getLista(getFrmPai().jTEnderecoServidor.getText(), Integer.parseInt(getFrmPai().jTPortaServidor.getText())));
+        getFrmClienteListar().setVisible(true);
+    }
 
-	/**
-	 * Retorna o formulário utilizado por este controle.
-	 */
-	public FrmClienteListar getFrmClienteListar(){
-		return frmClienteListar;
-	}
+    /**
+     * Fecha a janela
+     * @param e Objeto do evento
+     */    
+    public void jBFechar_actionPerformed(ActionEvent e) {
+        getFrmClienteListar().setVisible(false);
+    }
 
-	/**
-	 * Modifica o formulário utilizando por este controle.
-	 * 
-	 * @param frmClienteListar    Um formulario do tipo FrmClienteListar.
-	 */	 
-	public void setFrmClienteListar(FrmClienteListar frmClienteListar){
-		this.frmClienteListar = frmClienteListar;
-	}
+    /**
+     * Retorna o formulário utilizado por este controle.
+     *
+     * @return Um formulário de listar cliente
+     */
+    public FrmClienteListar getFrmClienteListar() {
+        return frmClienteListar;
+    }
+
+    /**
+     * Modifica o formulário utilizando por este controle.
+     *
+     * @param frmClienteListar Um formulario do tipo FrmClienteListar.
+     */
+    public void setFrmClienteListar(FrmClienteListar frmClienteListar) {
+        this.frmClienteListar = frmClienteListar;
+    }
+
+    /**
+     * Retorna o formulário pai deste controle.
+     * @return um formulário pai
+     */
+    public FrmCliente getFrmPai() {
+        return frmPai;
+    }
+
+    /**
+     * Modifica o formulário pai utilizado por este controle.
+     *
+     * @param frmPai Um formulário do tipo FrmCliente pai da janela.
+     */
+    public void setFrmPai(FrmCliente frmPai) {
+        this.frmPai = frmPai;
+    }
 }

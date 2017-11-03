@@ -20,10 +20,11 @@ public class HashMapDAOFactory extends DAOFactory {
      *
      * @return ClienteDAO Um DAORemoto para cliente
      */
+    @Override
     public ClienteDAO getClienteDAO() {
         try {
             //Referência para rmiregistry na porta 1099
-            Registry registro = LocateRegistry.getRegistry("localhost");
+            Registry registro = LocateRegistry.getRegistry(getEnderecoServidor(), getPortaServidor());
             //Localiza a referência do objeto remoto 
             Object obj = registro.lookup("clienteDAO");
             ClienteDAO clienteDao = (ClienteDAO) obj;

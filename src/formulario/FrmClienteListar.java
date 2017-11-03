@@ -28,7 +28,7 @@ public class FrmClienteListar extends JFrame {
     }
 
     /**
-     * Description of the Method
+     * Inicializa os componentes da inteface gráfica
      */
     private void inicializar() {
 
@@ -38,6 +38,7 @@ public class FrmClienteListar extends JFrame {
         contentPane.setLayout(null);
         this.setSize(new Dimension(310, 220));
         this.setTitle("Listar Cliente");
+		this.setLocation(390,0);
 
         jBFechar = new JButton();
         jBFechar.setBounds(new Rectangle(200, 159, 90, 27));
@@ -57,6 +58,10 @@ public class FrmClienteListar extends JFrame {
         contentPane.add(jBFechar, null);
     }
 
+    /**
+     * Popula os dados na tabela
+     * @param clientes Uma lista de clientes
+     */
     public void popularTabela(List<Cliente> clientes) {
         modelo.popularTabela(clientes);
     }

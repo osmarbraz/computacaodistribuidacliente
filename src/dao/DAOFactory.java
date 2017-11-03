@@ -10,11 +10,21 @@ public abstract class DAOFactory {
     //Tipos de Fonte de Dados suportados pela Factory
     public static final int HASHMAP = 1;
 
+    private static String enderecoServidor;
+    private static int portaServidor;
+
     //Retorna o DAO instanciado
     public abstract ClienteDAO getClienteDAO();
 
-    //Retorna a Factory do tipo especificado	
+    //Retorna a Factory do tipo especificado de uma fonte remota default	
     public static DAOFactory getDAOFactory() {
+        return getDAOFactory("localhost", 1099);
+    }
+
+    //Retorna a Factory do tipo especificado de uma fonte especificada	
+    public static DAOFactory getDAOFactory(String enderecoServidor, int portaServidor) {
+        setEnderecoServidor(enderecoServidor);
+        setPortaServidor(portaServidor);
         int whichFactory = Factory.FABRICA;
         switch (whichFactory) {
             case HASHMAP:
@@ -24,4 +34,21 @@ public abstract class DAOFactory {
                 return null;
         }
     }
+
+    public static void setEnderecoServidor(String _enderecoServidor) {
+        enderecoServidor = _enderecoServidor;
+    }
+
+    public static String getEnderecoServidor() {
+        return enderecoServidor;
+    }
+
+    public static void setPortaServidor(int _portaServidor) {
+        portaServidor = _portaServidor;
+    }
+
+    public static int getPortaServidor() {
+        return portaServidor;
+    }
+
 }

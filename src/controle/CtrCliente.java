@@ -74,28 +74,33 @@ public class CtrCliente {
                     public void mouseClicked(MouseEvent e) {
                         System.out.println("Inserido 2 clientes");
                         Cliente cli1 = new Cliente("1", "Joao", "1111");
-                        cli1.inserir();
+                        cli1.inserir(getFrmCliente().jTEnderecoServidor.getText(), Integer.parseInt(getFrmCliente().jTPortaServidor.getText()));
                         Cliente cli2 = new Cliente("2", "maria", "2222");
-                        cli2.inserir();
+                        cli2.inserir(getFrmCliente().jTEnderecoServidor.getText(), Integer.parseInt(getFrmCliente().jTPortaServidor.getText()));
 
                     }
                 });
     }
 
     /**
-     * Opera��o que inicia a sequência de interações da manutenção de cliente.
+     * Operação que inicia a sequência de interações da manutenção de cliente.
      */
     public void executar() {
         getFrmCliente().setVisible(true);
     }
 
+    /**
+     * Realiza a inclusão de clientes
+     *
+     * @param e Objeto do evento
+     */
     public void jBIncluir_actionPerformed(ActionEvent e) {
         Cliente cliente = new Cliente();
         cliente.setClienteId(getFrmCliente().jTClienteId.getText());
         cliente.setNome(getFrmCliente().jTNome.getText());
         cliente.setCpf(getFrmCliente().jTCpf.getText());
 
-        boolean resultado = cliente.inserir();
+        boolean resultado = cliente.inserir(getFrmCliente().jTEnderecoServidor.getText(), Integer.parseInt(getFrmCliente().jTPortaServidor.getText()));
         if (resultado == true) {
             getFrmCliente().mostrarMensagem("Inclusão realizada com sucesso!");
         } else {
@@ -103,13 +108,18 @@ public class CtrCliente {
         }
     }
 
+    /**
+     * Realiza a alteração de cliente
+     *
+     * @param e Objeto do evento
+     */
     public void jBAlterar_actionPerformed(ActionEvent e) {
         if (!getFrmCliente().jTClienteId.getText().equalsIgnoreCase("")) {
             Cliente cliente = new Cliente();
             cliente.setClienteId(getFrmCliente().jTClienteId.getText());
             cliente.setNome(getFrmCliente().jTNome.getText());
             cliente.setCpf(getFrmCliente().jTCpf.getText());
-            int resultado = cliente.alterar();
+            int resultado = cliente.alterar(getFrmCliente().jTEnderecoServidor.getText(), Integer.parseInt(getFrmCliente().jTPortaServidor.getText()));
             if (resultado != 0) {
                 getFrmCliente().mostrarMensagem("Alteração realizada com sucesso!");
             } else {
@@ -120,11 +130,16 @@ public class CtrCliente {
         }
     }
 
+    /**
+     * Consulta de cliente pelo id
+     *
+     * @param e Objeto do evento
+     */
     public void jBConsultar_actionPerformed(ActionEvent e) {
         if (!getFrmCliente().jTClienteId.getText().equalsIgnoreCase("")) {
             Cliente cliente = new Cliente();
             cliente.setClienteId(getFrmCliente().jTClienteId.getText());
-            boolean resultado = cliente.abrir();
+            boolean resultado = cliente.abrir(getFrmCliente().jTEnderecoServidor.getText(), Integer.parseInt(getFrmCliente().jTPortaServidor.getText()));
             if (resultado == true) {
                 getFrmCliente().jTNome.setText(cliente.getNome());
                 getFrmCliente().jTCpf.setText(cliente.getCpf());
@@ -137,35 +152,40 @@ public class CtrCliente {
         }
     }
 
+    /**
+     * Realiza a exclusão de cliente por id
+     *
+     * @param e Objeto do evento
+     */
     void jBExcluir_actionPerformed(ActionEvent e) {
         if (!getFrmCliente().jTClienteId.getText().equalsIgnoreCase("")) {
             Cliente cliente = new Cliente();
             cliente.setClienteId(getFrmCliente().jTClienteId.getText());
-            int resultado = cliente.excluir();
+            int resultado = cliente.excluir(getFrmCliente().jTEnderecoServidor.getText(), Integer.parseInt(getFrmCliente().jTPortaServidor.getText()));
             if (resultado != 0) {
                 getFrmCliente().mostrarMensagem("Exclusão realizada com sucesso!");
             } else {
                 getFrmCliente().mostrarMensagem("Exclusão nao realizada!");
             }
         } else {
-            getFrmCliente().mostrarMensagem("Preencha o Id do cliente a ser exclu�do!");
+            getFrmCliente().mostrarMensagem("Preencha o Id do cliente a ser excluído!");
         }
     }
 
     /**
-     * Executa a controle de listar
+     * Executa a controle de listar clientes
      *
-     * @param e
+     * @param e Objeto do evento
      */
     public void jBListar_actionPerformed(ActionEvent e) {
-        CtrClienteListar controle = new CtrClienteListar();
+        CtrClienteListar controle = new CtrClienteListar(getFrmCliente());
         controle.executar();
     }
 
     /**
      * Limpa as caixas de texto
      *
-     * @param e
+     * @param e Objeto do evento
      */
     public void jBLimpar_actionPerformed(ActionEvent e) {
         getFrmCliente().jTClienteId.setText("");
@@ -173,12 +193,18 @@ public class CtrCliente {
         getFrmCliente().jTCpf.setText("");
     }
 
+    /**
+     * Sai do programa
+     *
+     * @param e Objeto do evento
+     */
     public void jBFechar_actionPerformed(ActionEvent e) {
         System.exit(0);
     }
 
     /**
      * Retorna o formulário utilizado por este controle.
+     * @return Retorna um formulário de cliente
      */
     public FrmCliente getFrmCliente() {
         return frmCliente;
