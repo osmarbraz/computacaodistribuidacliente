@@ -64,7 +64,7 @@ public class FrmCliente extends javax.swing.JFrame {
         jTPortaServidor = new javax.swing.JTextField();
         jLPortaServidor = new javax.swing.JLabel();
 
-        //Saida da janela
+        //Saída da janela
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Cliente");
 
@@ -208,7 +208,7 @@ public class FrmCliente extends javax.swing.JFrame {
     }
 
     /**
-     * Mostra mensagem na saida padrão  
+     * Mostra mensagem na saída padrão  
      * @param mensagem Uma mensagem a ser exibida
      */
     public void mostrarMensagem(String mensagem) {
