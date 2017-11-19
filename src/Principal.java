@@ -2,8 +2,9 @@
 import controle.CtrCliente;
 
 /**
- * Classe que possui a operação main da aplicação. Server para dar inicio ao
- * sistema.
+ * Classe que possui a operação main da aplicação. 
+ * 
+ * Serve para dar ínicio ao sistema.
  */
 public class Principal {
 
